@@ -102,3 +102,17 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+\.DS_Store
+\datasets/Market1501/
+\datasets/DukeMTMC/
+\datasets/CUHK03/
+\datasets/NTUCampus/
+\datasets/MSMT17/
+\datasets/CUHK03/
+\.ipynb_checkpoints/
+
+checkpoint/
+._.DS_Store
+nohup.out
+
