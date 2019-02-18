@@ -2,7 +2,7 @@
 The architecture follows the NTU ROSE ReID Project guide line [Person_ReID_Baseline](https://github.com/LinShanify/Person_ReID_Baseline). Some of codes are copy from L1aoXingyu's [reid_baseline](https://github.com/L1aoXingyu/reid_baseline).
 
 * `ResNet50 Last Stride 1` from huanghoujing's [triplet baseline](https://github.com/huanghoujing/person-reid-triplet-loss-baseline) 
-* `WarmupMultiStepLR`: Warmup Strategy is from FAIR's paper: _'Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour'_
+* `WarmupMultiStepLR`: is from FAIR's paper: _'Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour'_
 * `ImpTriplet`: from paper _'Deep Metric Learning with Improved Triplet Loss for Face Clustering in Videos'_
 
 
@@ -47,10 +47,10 @@ python test.py ./config/market_softmax.yaml True
 python test_cross_dataset.py ./config/market_softmax.yaml DukeMTMC
 ```
 
-## Results
+## Results Compare with [Person ReID Baseline](https://github.com/LinShanify/Person_ReID_Baseline)
 ##### Softmax Only Batch Size 64: Rank1 (mAP)
 
-|Dataset     |[Softmax](https://github.com/LinShanify/Person_ReID_Baseline)|Strong Softmax|
+|Dataset     |    Softmax  |Strong Softmax|
 |     ---    |     --      | --              |
 | CUHK03     | 56.1 (52.4) | 61.1 (56.2)     |
 | Market1501 | 91.6 (78.7) | 92.5 (80.2)     |
