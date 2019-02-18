@@ -4,13 +4,13 @@
 import torch.nn.functional as F
 
 from .triplet_loss import TripletLoss
-from .new_triplet_loss import NewTripletLoss
+from .imptriplet_loss import ImpTripletLoss
 
 
 def make_loss(cfg):
     sampler = cfg.DATALOADER.SAMPLER
     triplet = TripletLoss(cfg.SOLVER.MARGIN)  # triplet loss
-    newtriplet = NewTripletLoss(cfg.SOLVER.MARGIN)  # triplet loss
+    imptriplet = ImpTripletLoss(cfg.SOLVER.MARGIN)  # triplet loss
 
     if sampler == 'softmax':
         def loss_func(score, feat, target):
@@ -21,10 +21,10 @@ def make_loss(cfg):
     elif cfg.DATALOADER.SAMPLER == 'softmax_triplet':
         def loss_func(score, feat, target):
             return F.cross_entropy(score, target) + triplet(feat, target)[0]
-    elif cfg.DATALOADER.SAMPLER == 'softmax_newtriplet':
+    elif cfg.DATALOADER.SAMPLER == 'softmax_imptriplet':
         def loss_func(score, feat, target):
-            return F.cross_entropy(score, target) + newtriplet(feat, target)[0]
+            return F.cross_entropy(score, target) + imptriplet(feat, target)[0]
     else:
-        print('expected sampler should be softmax, triplet, softmax_triplet or softmax_new-triplet, '
+        print('expected sampler should be softmax, triplet, softmax_triplet or softmax_imptriplet, '
               'but got {}'.format(cfg.DATALOADER.SAMPLER))
     return loss_func

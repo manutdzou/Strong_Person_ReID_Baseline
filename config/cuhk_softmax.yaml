@@ -1,5 +1,4 @@
 MODEL:
-  DEVICE: "cuda:7"
   NAME: 'ResNet50'
 
 INPUT:
@@ -13,7 +12,7 @@ DATASETS:
 
 DATALOADER:
   SAMPLER: 'softmax'
-  NUM_WORKERS: 8
+  NUM_WORKERS: 4
 
 SOLVER:
   OPTIMIZER_NAME: 'Adam'
@@ -37,7 +36,7 @@ SOLVER:
   EVAL_PERIOD: 20
 
 TEST:
-  IMS_PER_BATCH: 256
-  RE_RANKING: False
+  IMS_PER_BATCH: 128
 
 OUTPUT_DIR: "./checkpoint/CUHK03/Softmax_BS64"
+DEVICE: "cuda:5"

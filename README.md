@@ -30,6 +30,9 @@ Currently support:
 * Batch Size 64 use around 10G GPU memory
 ``` bash
 python train.py ./config/market_softmax.yaml
+
+### Change GPU
+python train.py ./config/market_softmax.yaml --DEVICE=cuda:5
 ```
 
 ## Testing:
@@ -37,8 +40,11 @@ python train.py ./config/market_softmax.yaml
 ### No Re-Ranking
 python test.py ./config/market_softmax.yaml
 
+### Change GPU
+python test.py ./config/market_softmax.yaml --DEVICE=cuda:5
+
 ### With Re-Ranking
-python test.py ./config/market_softmax.yaml True
+python test.py ./config/market_softmax.yaml --RE_RANKING=True
 ```
 
 ## Testing Cross Dataset:

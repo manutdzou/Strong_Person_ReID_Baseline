@@ -6,7 +6,6 @@ _C = CN()
 # MODEL
 # -----------------------------------------------------------------------------
 _C.MODEL = CN()
-_C.MODEL.DEVICE = "cuda:0"
 _C.MODEL.NAME = 'ResNet50'
 _C.MODEL.LAST_STRIDE = 1
 _C.MODEL.PRETRAIN_PATH = ''
@@ -87,9 +86,11 @@ _C.SOLVER.IMS_PER_BATCH = 64
 _C.TEST = CN()
 _C.TEST.IMS_PER_BATCH = 128
 _C.TEST.LOAD_EPOCH = 120
-_C.TEST.RE_RANKING = False
+
 
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
 _C.OUTPUT_DIR = ""
+_C.DEVICE = "cuda:0"
+_C.RE_RANKING = False

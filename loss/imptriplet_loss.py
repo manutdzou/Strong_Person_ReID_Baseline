@@ -94,7 +94,7 @@ def hard_example_mining(dist_mat, labels, return_inds=False):
         return dist_ap, dist_an, dist_np
 
 
-class NewTripletLoss(object):
+class ImpTripletLoss(object):
     """Modified from Tong Xiao's open-reid (https://github.com/Cysu/open-reid).
     Related Triplet Loss theory can be found in paper 'In Defense of the Triplet
     Loss for Person Re-Identification'."""

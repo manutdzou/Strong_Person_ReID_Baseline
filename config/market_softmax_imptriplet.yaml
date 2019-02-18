@@ -1,5 +1,4 @@
 MODEL:
-  DEVICE: "cuda:4"
   NAME: 'ResNet50'
   
 INPUT:
@@ -9,10 +8,10 @@ INPUT:
   PADDING: 10
 
 DATASETS:
-  NAMES: ('CUHK03')
+  NAMES: ('Market1501')
 
 DATALOADER:
-  SAMPLER: 'softmax_newtriplet'
+  SAMPLER: 'softmax_imptriplet'
   NUM_INSTANCE: 4
   NUM_WORKERS: 8
 
@@ -39,6 +38,7 @@ SOLVER:
 
 TEST:
   IMS_PER_BATCH: 256
-  RE_RANKING: False
+  
 
-OUTPUT_DIR: "./checkpoint/CUHK03/Softmax_NewTriplet_BS64"
+OUTPUT_DIR: "./checkpoint/Market1501/Softmax_ImpTriplet_BS64"
+DEVICE: "cuda:4"

@@ -1,5 +1,4 @@
 MODEL:
-  DEVICE: "cuda:7"
   NAME: 'ResNet50'
 
 INPUT:
@@ -38,6 +37,6 @@ SOLVER:
 
 TEST:
   IMS_PER_BATCH: 256
-  RE_RANKING: False
 
 OUTPUT_DIR: "./checkpoint/MSMT17/Softmax_BS64"
+DEVICE: "cuda:7"
