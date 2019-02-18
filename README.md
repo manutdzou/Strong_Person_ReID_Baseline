@@ -1,4 +1,10 @@
-# Basic Person ReID Baseline and Project Template
+# Strong Person ReID Baseline
+The architecture follows the NTU ROSE ReID Project guide line [Person_ReID_Baseline](https://github.com/LinShanify/Person_ReID_Baseline). Some of codes are copy from L1aoXingyu's [reid_baseline](https://github.com/L1aoXingyu/reid_baseline).
+
+* `ResNet50 Last Stride 1` from huanghoujing's [triplet baseline](https://github.com/huanghoujing/person-reid-triplet-loss-baseline) 
+* `WarmupMultiStepLR`: Warmup Strategy is from FAIR's paper: _'Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour'_
+* `ImpTriplet`: from paper _'Deep Metric Learning with Improved Triplet Loss for Face Clustering in Videos'_
+
 
 ## Requirements
 - [python 3](https://www.python.org/downloads/)
@@ -20,6 +26,8 @@ Currently support:
 * [MSMT17](https://www.pkuvmc.com/publications/msmt17.html)
 
 ## Training:
+* As the last feature maps increase. Batch Size 128 will use more than 12G
+* Batch Size 64 use around 10G GPU memory
 ``` bash
 python train.py ./config/market_softmax.yaml
 ```
@@ -40,72 +48,21 @@ python test_cross_dataset.py ./config/market_softmax.yaml DukeMTMC
 ```
 
 ## Results
+##### Softmax Only Batch Size 64: Rank1 (mAP)
 
-|            |   Softmax   | Softmax+Triplet |Softmax+Re-ranking|Softmax+Triplet+Re-ranking |
-|     ---    |     --      | --              |--                |--                         |
-| CUHK03     | 61.8 (58.7) | 63.6 (60.2)     |68.2 (70.0)       |72.6 (73.9)                |
-| Market1501 | 91.3 (77.8) | 92.8 (82.0)     |90.6 (85.7)       |93.3 (90.1)                |
-| DukeMTMC   | 84.1 (67.7) | 86.2 (73.0)     |85.3 (79.6)       |88.2 (83.5)                |
-| MSMT17     | 71.6 (43.9) | 74.0 (47.5)     |-                 |-                          |
+|Dataset     |[Softmax](https://github.com/LinShanify/Person_ReID_Baseline)|Strong Softmax|
+|     ---    |     --      | --              |
+| CUHK03     | 56.1 (52.4) | 61.1 (56.2)     |
+| Market1501 | 91.6 (78.7) | 92.5 (80.2)     |
+| DukeMTMC   | 83.4 (66.6) | 84.8 (68.3)     |
+| MSMT17     | 69.0 (40.1) | -     |
 
+##### Softmax+Tripelt Only Batch Size 64 : Rank1  (mAP)
 
-## File and Folder Structure
-```
-├──  config
-│    └── defaults.py  - here's the default config file.
-│    └── market_softmax.yml  - here's the specific config file for specific model or dataset.
-│ 
-│
-├──  data_loader  
-│    └── datasets_importer  - here's the datasets folder that is responsible for all data handling.
-│        └── BaseDataset.py  - Generate and show basic statistics of the dataset in terminal.
-│        └── ImageDataset.py  - PIL read the images and gernerate PyTorch Dataset Object
-│        └── market1501.py  - Data handler for dataset Market1501
-│
-│    └── transforms  - here's the data preprocess folder is responsible for all data augmentation.
-│        └── transforms.py  - initialization of data transformation of the network
-│        └── RandomErasing.py  - Custom-made RandomErasing process for data augmentation
-│ 
-│    └── samplers  - here's the id samplering function for triplet training
-│        └── triplet_sampler.py
-│ 
-│    └── data_loader.py  - here's the file to make dataloader.
-│
-│
-├──  datasets  
-│    └── PersonReID_Dataset_Downloader.py  - here's the file to automatic download the dataset
-│    └── Market1501  - here will be the folder storing the downloaded dataset
-│
-│
-├──  evaluation
-│   ├── evaluation.py   - this file to compute the CMC and mAP result.
-│   └── re_ranking.py   - this file is the re_ranking function.
-│
-│
-├── logger  - this folder is to create a logger and store the training process.
-│
-│
-├── loss  - this folder is the loss function for the network.
-│   └── make_loss.py
-│   └── triplet_loss.py  - Custom-made Triplet Loss function
-│  
-│
-├── models  - this folder contains models of the project.
-│   └── BasicModule.py     - Re-package the Pytorch Model with save and load models function
-│   └── ResNet50.py        - Model with ResNet50 as backbone
-│
-│
-├── optimizer - this folder contains optimizer of the project.
-│
-├── scheduler - this folder contains learning rate scheduler
-|
-├── utils       
-│   └── check_jupyter_run.py - if it is running on the jupyter use the notebook version of tqdm
-│   
-│ 
-├── train.py                - here's the train the network
-│    
-└── test.py                 - here's the test the network performance   
-│
-└── test_cross_dataset.pu	- test the performance in cross-dataset scenario
-```
+|            |Softmax+Triplet| Strong Softmax+Triplet |Strong Softmax+ImpTripet|
+|     ---    |     --      | --              |--                |
+| CUHK03     | 65.6 (61.8) | 66.3 (61.8)     |66.7 (63.7)       |
+| Market1501 | 93.2 (82.0) | 93.4 (83.1)     |93.6 (84.6)       |
+| DukeMTMC   | 86.4 (72.4) | 86.2 (72.5)     |86.0 (74.5)       |
+| MSMT17     | - | -|-|
+

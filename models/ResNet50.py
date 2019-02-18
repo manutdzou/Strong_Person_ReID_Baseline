@@ -30,7 +30,7 @@ class ResNet50(BasicModule):
     in_planes = 2048
     def __init__(self, num_classes, last_stride, model_path):
         super(ResNet50, self).__init__()
-        self.model_name = 'ResNet50_Customize'
+        self.model_name = 'ResNet50'
         self.base = ResNet(last_stride)
         self.base.load_param(model_path)
         self.gap = nn.AdaptiveAvgPool2d(1)

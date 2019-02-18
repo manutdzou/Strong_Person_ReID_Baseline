@@ -12,7 +12,7 @@ DATASETS:
   NAMES: ('DukeMTMC')
 
 DATALOADER:
-  SAMPLER: 'softmax_triplet'
+  SAMPLER: 'softmax_newtriplet'
   NUM_INSTANCE: 4
   NUM_WORKERS: 8
 
@@ -41,4 +41,4 @@ TEST:
   IMS_PER_BATCH: 256
   RE_RANKING: False
 
-OUTPUT_DIR: "./checkpoint/DukeMTMC/Softmax_Triplet_BS64"
+OUTPUT_DIR: "./checkpoint/DukeMTMC/Softmax_NewTriplet_BS64"

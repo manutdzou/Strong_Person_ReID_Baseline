@@ -19,6 +19,7 @@ else:
     
 def test(config_file, re_ranking=False):
     cfg.merge_from_file(config_file)
+    cfg.MODEL.PRETRAIN_PATH = os.path.join(os.path.expanduser("~"),'.torch','models','resnet50-19c8e357.pth')
     cfg.freeze()
     
     PersonReID_Dataset_Downloader('./datasets',cfg.DATASETS.NAMES)
@@ -33,7 +34,7 @@ def test(config_file, re_ranking=False):
     
     train_loader, val_loader, num_query, num_classes = data_loader(cfg,cfg.DATASETS.NAMES)
     
-    model = getattr(models, cfg.MODEL.NAME)(num_classes)
+    model = getattr(models, cfg.MODEL.NAME)(num_classes, cfg.MODEL.LAST_STRIDE, cfg.MODEL.PRETRAIN_PATH)
     model.load(cfg.OUTPUT_DIR,cfg.TEST.LOAD_EPOCH)
     model = model.eval()
     

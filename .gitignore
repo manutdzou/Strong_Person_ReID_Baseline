@@ -116,3 +116,7 @@ checkpoint/
 ._.DS_Store
 nohup.out
 
+nohup3.out
+auto3.sh
+auto2.sh
+nohup2.out

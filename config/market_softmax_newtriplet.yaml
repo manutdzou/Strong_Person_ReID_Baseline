@@ -9,10 +9,10 @@ INPUT:
   PADDING: 10
 
 DATASETS:
-  NAMES: ('DukeMTMC')
+  NAMES: ('Market1501')
 
 DATALOADER:
-  SAMPLER: 'softmax_triplet'
+  SAMPLER: 'softmax_newtriplet'
   NUM_INSTANCE: 4
   NUM_WORKERS: 8
 
@@ -39,6 +39,8 @@ SOLVER:
 
 TEST:
   IMS_PER_BATCH: 256
+  LOAD_EPOCH: 120
   RE_RANKING: False
+  
 
-OUTPUT_DIR: "./checkpoint/DukeMTMC/Softmax_Triplet_BS64"
+OUTPUT_DIR: "./checkpoint/Market1501/Softmax_NewTriplet_BS64"
