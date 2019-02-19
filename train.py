@@ -51,9 +51,6 @@ def train(config_file, **kwargs):
     train_loader, val_loader, num_query, num_classes = data_loader(cfg,cfg.DATASETS.NAMES)
 
     model = getattr(models, cfg.MODEL.NAME)(num_classes, cfg.MODEL.LAST_STRIDE, cfg.MODEL.PRETRAIN_PATH)
-    if device:
-        model.to(device)
-    model.train()
     optimizer = make_optimizer(cfg, model)
     scheduler = make_scheduler(cfg,optimizer)
     loss_fn = make_loss(cfg)
@@ -65,9 +62,10 @@ def train(config_file, **kwargs):
         running_loss = 0.0
         running_acc = 0
         for data in tqdm(train_loader, desc='Iteration', leave=False):
+            model.train()
             images, labels = data
-
             if device:
+                model.to(device)
                 images, labels = images.to(device), labels.to(device)
 
             optimizer.zero_grad()
@@ -90,6 +88,7 @@ def train(config_file, **kwargs):
         scheduler.step()
 
         if (epoch+1) % checkpoint_period == 0:
+            model.cpu()
             model.save(output_dir,epoch+1)
 
         # Validation
@@ -101,7 +100,6 @@ def train(config_file, **kwargs):
                 model.eval()
                 with torch.no_grad():
                     images, pids, camids = data
-
                     if device:
                         model.to(device)
                         images = images.to(device)
