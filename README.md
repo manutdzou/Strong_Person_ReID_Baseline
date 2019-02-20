@@ -3,7 +3,6 @@ The architecture follows the NTU ROSE ReID Project guide line [Person_ReID_Basel
 
 * `ResNet50 Last Stride 1` from huanghoujing's [triplet baseline](https://github.com/huanghoujing/person-reid-triplet-loss-baseline) 
 * `WarmupMultiStepLR`: is from FAIR's paper: _'Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour'_
-* `ImpTriplet`: from paper _'Deep Metric Learning with Improved Triplet Loss for Face Clustering in Videos'_
 
 
 ## Requirements
@@ -62,18 +61,18 @@ python test_cross_dataset.py ./config/market_softmax.yaml DukeMTMC
 ##### Softmax Only Batch Size 64: Rank1 (mAP)
 
 |Dataset     |    Softmax  |Strong Softmax|
-|     ---    |     --      | --              |
-| CUHK03     | 56.1 (52.4) | 61.1 (56.2)     |
-| Market1501 | 91.6 (78.7) | 92.5 (80.2)     |
-| DukeMTMC   | 83.4 (66.6) | 84.8 (68.3)     |
-| MSMT17     | 69.0 (40.1) | -     |
+|     ---    |     --      | --           |
+| CUHK03     | 56.1 (52.4) | 61.1 (56.2   |
+| Market1501 | 91.6 (78.7) | 92.5 (80.2)  |
+| DukeMTMC   | 83.4 (66.6) | 84.8 (68.3)  |
+| MSMT17     | 69.0 (40.1) | 71.4 (42.5)  |
 
 ##### Softmax+Tripelt Only Batch Size 64 : Rank1  (mAP)
 
-|            |Softmax+Triplet| Strong Softmax+Triplet |Strong Softmax+ImpTripet|
-|     ---    |     --      | --              |--                |
-| CUHK03     | 65.6 (61.8) | 66.3 (61.8)     |66.7 (63.7)       |
-| Market1501 | 93.2 (82.0) | 93.4 (83.1)     |93.6 (84.6)       |
-| DukeMTMC   | 86.4 (72.4) | 86.2 (72.5)     |86.0 (74.5)       |
-| MSMT17     | - | -|-|
+|            |Softmax+Triplet| Strong Softmax+Triplet |
+|     ---    |     --        | --                     |
+| CUHK03     | 65.6 (61.8)   | 66.3 (61.8)            |
+| Market1501 | 93.2 (82.0)   | 93.4 (83.1)            |
+| DukeMTMC   | 86.4 (72.4)   | 86.2 (72.5)            |
+| MSMT17     | 73.9 (46.4)   | 74.6 (47.3)            |
 
