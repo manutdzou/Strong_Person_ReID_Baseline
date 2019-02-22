@@ -31,6 +31,7 @@ class ResNet50(BasicModule):
     def __init__(self, num_classes, last_stride, model_path):
         super(ResNet50, self).__init__()
         self.model_name = 'ResNet50'
+        self.download = models.resnet50(pretrained=True)
         self.base = ResNet(last_stride)
         self.base.load_param(model_path)
         self.gap = nn.AdaptiveAvgPool2d(1)
