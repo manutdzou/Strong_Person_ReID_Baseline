@@ -38,5 +38,5 @@ SOLVER:
 TEST:
   IMS_PER_BATCH: 256
 
-OUTPUT_DIR: "./checkpoint/Market1501/Softmax_BS64"
+OUTPUT_DIR: "./checkpoint/Market1501/Softmax_S1_BS64"
 DEVICE: "cuda:5"

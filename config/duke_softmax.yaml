@@ -38,5 +38,5 @@ SOLVER:
 TEST:
   IMS_PER_BATCH: 256
 
-OUTPUT_DIR: "./checkpoint/DukeMTMC/Softmax_BS64"
+OUTPUT_DIR: "./checkpoint/DukeMTMC/Softmax_S1_BS64"
 DEVICE: "cuda:0"

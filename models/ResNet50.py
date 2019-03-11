@@ -2,7 +2,7 @@ import torch
 from torch import nn
 from torchvision import models
 from .BasicModule import BasicModule
-from .backbones.resnet import ResNet
+from .backbones.resnet import resnet50
 
 def weights_init_kaiming(m):
     classname = m.__class__.__name__
@@ -28,12 +28,11 @@ def weights_init_classifier(m):
         
 class ResNet50(BasicModule):
     in_planes = 2048
-    def __init__(self, num_classes, last_stride, model_path):
+    def __init__(self, num_classes, last_stride):
         super(ResNet50, self).__init__()
         self.model_name = 'ResNet50'
         self.download = models.resnet50(pretrained=True)
-        self.base = ResNet(last_stride)
-        self.base.load_param(model_path)
+        self.base = resnet50(pretrained=True, last_conv_stride=last_stride)
         self.gap = nn.AdaptiveAvgPool2d(1)
         # self.gap = nn.AdaptiveMaxPool2d(1)
         self.num_classes = num_classes

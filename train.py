@@ -28,7 +28,6 @@ def train(config_file, **kwargs):
             opts.append(k)
             opts.append(v)
         cfg.merge_from_list(opts)
-    cfg.MODEL.PRETRAIN_PATH = os.path.join(os.path.expanduser("~"),'.torch','models','resnet50-19c8e357.pth')
     cfg.freeze()
     
     PersonReID_Dataset_Downloader('./datasets',cfg.DATASETS.NAMES)
@@ -50,7 +49,7 @@ def train(config_file, **kwargs):
      
     train_loader, val_loader, num_query, num_classes = data_loader(cfg,cfg.DATASETS.NAMES)
 
-    model = getattr(models, cfg.MODEL.NAME)(num_classes, cfg.MODEL.LAST_STRIDE, cfg.MODEL.PRETRAIN_PATH)
+    model = getattr(models, cfg.MODEL.NAME)(num_classes, cfg.MODEL.LAST_STRIDE)
     optimizer = make_optimizer(cfg, model)
     scheduler = make_scheduler(cfg,optimizer)
     loss_fn = make_loss(cfg)

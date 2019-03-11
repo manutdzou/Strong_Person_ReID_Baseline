@@ -39,5 +39,5 @@ SOLVER:
 TEST:
   IMS_PER_BATCH: 128
 
-OUTPUT_DIR: "./checkpoint/MSMT17/Softmax_Triplet_BS64"
+OUTPUT_DIR: "./checkpoint/MSMT17/Softmax_Triplet_S1_BS64"
 DEVICE: "cuda:7"
